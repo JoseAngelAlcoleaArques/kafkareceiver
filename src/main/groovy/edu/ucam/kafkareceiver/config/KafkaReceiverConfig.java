@@ -5,10 +5,10 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
-import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,15 +20,21 @@ public class KafkaReceiverConfig {
 
     @Bean
     public ConsumerFactory<String, Mensaje> consumerFactory() {
-        Map<String, String> props = new HashMap<>();
+        Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
-        props.put(JsonSerializer.TYPE_MAPPINGS, "edu/ucam/kafkareceiver/entity/Mensaje.java");
+        props.put(JsonDeserializer.TRUSTED_PACKAGES, "edu.ucam.kafkasender.entity, edu.ucam.kafkareceiver.entity");
 
-        final JsonDeserializer<Mensaje> jsonDeserializer = new JsonDeserializer<>();
-        return new DefaultKafkaConsumerFactory(
-                props,
-                new StringDeserializer(),
-                jsonDeserializer
-        );
+        final JsonDeserializer<Mensaje> jsonDeserializer = new JsonDeserializer<>(Mensaje.class);
+        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), jsonDeserializer);
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, Mensaje>
+    kafkaListenerContainerFactory(){
+
+        ConcurrentKafkaListenerContainerFactory<String, Mensaje> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory());
+        return factory;
     }
 }
