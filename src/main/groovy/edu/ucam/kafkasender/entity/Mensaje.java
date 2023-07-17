@@ -1,4 +1,4 @@
-package edu.ucam.kafkareceiver.entity;
+package edu.ucam.kafkasender.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -8,8 +8,6 @@ public class Mensaje implements Serializable {
     private String id;
     private Date date;
     private String mensaje;
-
-    public Mensaje(){}
 
     public String getId() {
         return id;

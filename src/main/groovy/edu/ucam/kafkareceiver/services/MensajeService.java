@@ -1,6 +1,6 @@
 package edu.ucam.kafkareceiver.services;
 
-import edu.ucam.kafkareceiver.entity.Mensaje;
+import edu.ucam.kafkasender.entity.Mensaje;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
