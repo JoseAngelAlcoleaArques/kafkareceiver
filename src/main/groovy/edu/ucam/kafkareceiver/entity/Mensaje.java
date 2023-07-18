@@ -1,4 +1,4 @@
-package edu.ucam.kafkasender.entity;
+package edu.ucam.kafkareceiver.entity;
 
 import java.io.Serializable;
 import java.util.Date;
