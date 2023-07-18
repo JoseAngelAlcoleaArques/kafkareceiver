@@ -25,7 +25,7 @@ public class KafkaReceiverConfig {
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, org.apache.kafka.common.serialization.StringDeserializer.class);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "grupo1");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "1");
         return props;
     }
 
