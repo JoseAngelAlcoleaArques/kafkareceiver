@@ -1,13 +1,15 @@
 package edu.ucam.kafkareceiver.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import edu.ucam.kafkareceiver.TipoEvento;
 
 import java.io.Serializable;
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.Map;
 
 public class EventoDTO implements Serializable {
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private Timestamp fecha;
     private String id;
     private TipoEvento tipoEvento;
