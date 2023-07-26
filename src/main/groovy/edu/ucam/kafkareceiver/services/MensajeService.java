@@ -15,7 +15,7 @@ public class MensajeService {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
-    @KafkaListener(topics = "test_topic")
+    @KafkaListener(topics = "testtopic")
     public void receiveMessage(ConsumerRecord<String, String> kafkaMessage) throws JsonProcessingException {
         objectMapper.registerModule(new JavaTimeModule());
         String jsonString = kafkaMessage.value();
